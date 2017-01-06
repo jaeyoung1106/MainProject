@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+
+	<!-- 모든 요청 페이지 인코딩 설정 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 스프링 전체 공용 설정파일 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+						/WEB-INF/spring/applicationContext.xml
+						<!--
+						아래처럼 추가적으로 사용할 컨텍스트를 등록하면 됩니다.
+						/WEB-INF/spring/commonContext.xml
+						-->
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+
+	<!-- 사용자(user)요청이 들어왔을때 스프링 설정파일 -->
+	<servlet>
+		<servlet-name>user</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- 사용자관련 스프링설정파일 경로 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring/customer/user-servlet.xml
+				/WEB-INF/spring/customer/memberContext.xml
+				
+				<!--
+				아래처럼 각 팀원들이 만들 컨텍스트를 등록하면 됩니다.
+				/WEB-INF/spring/customer/productContext.xml
+				/WEB-INF/spring/customer/orderContext.xml
+				/WEB-INF/spring/customer/boardQuestContext.xml
+				/WEB-INF/spring/customer/boardSnsContext.xml
+				/WEB-INF/spring/customer/cartContext.xml
+				/WEB-INF/spring/customer/myPageContext.xml
+				/WEB-INF/spring/customer/likeContext.xml
+				-->
+			</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>user</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- 관리자(manager)요청이 들어왔을때 스프링 설정파일 -->
+	<servlet>
+		<servlet-name>manager</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- 관리자관련 스프링설정파일 경로 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring/manager/manager-servlet.xml
+				
+				<!--
+				아래와 같이 각 팀원들이 만들 컨텍스트를 등록하면 됩니다.
+				/WEB-INF/spring/manager/managerMemberContext.xml
+				/WEB-INF/spring/manager/managerProductContext.xml
+				/WEB-INF/spring/manager/managerOrderContext.xml
+				/WEB-INF/spring/manager/managerBoardQuestContext.xml
+				/WEB-INF/spring/manager/managerBoardSnsContext.xml
+				/WEB-INF/spring/manager/managerGraphContext.xml
+				-->
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>manager</servlet-name>
+		<url-pattern>*.tdo</url-pattern>
+	</servlet-mapping>
+
+</web-app>
