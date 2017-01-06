@@ -14,7 +14,7 @@
 		비밀번호 : <input type="password" size="10" id="pass" name="pass"/>
 		<br/>
 		<input type="submit" value="로그인" id="login" />
-		<input type="button" value="회원가입" id="register" onclick="window.location='register.do'"/>
+		<input type="button" value="회원가입" id="register" onclick="window.location='registerForm.do'"/>
 		<br/>
 		<input type="button" value="아이디찾기" id="findID"/>
 		<input type="button" value="비밀번호찾기" id="findPASS"/>

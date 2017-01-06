@@ -23,4 +23,10 @@
 		SELECT * FROM CUSTOMER WHERE id=#{id}
 	</select>
 	
+	<insert id="insertMemberInfo" parameterType="style.member.user.model.MemberVO">
+		INSERT INTO CUSTOMER VALUES(#{memberVo.getId()},#{memberVo.getPassword()},#{memberVo.getPass_quest()},#{memberVo.getPass_answer()},
+									#{memberVo.getName()},#{memberVo.getZipcode()},#{memberVo.getAddress1()},#{memberVo.getAddress2()},#{memberVo.getEmail()},
+									#{new java.sql.Date(memberVo.getBirth().getTime())},#{memberVo.getBody()},#{memberVo.getHeight()},#{memberVo.getGender()},#{memberVo.getRegdate()},#{memberVo.getPoint()})
+	</insert>
+	
 </mapper>

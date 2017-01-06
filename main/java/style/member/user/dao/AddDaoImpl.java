@@ -12,12 +12,13 @@ public class AddDaoImpl implements AddDao {
 		this.sqlSession = sqlSession;
 	}
 	
+	String namespace="style.member.user.dao.userMember.";
 	
 	@Override
 	public int addUserInfo(MemberVO memberVo) {
 		// TODO Auto-generated method stub
-		return 0;
-		//퀴리문 작성 파일작성하기 
+		
+		return sqlSession.insert(namespace+"insertMemberInfo",memberVo);
 	
 	}
 	

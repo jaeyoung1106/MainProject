@@ -5,9 +5,17 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="loginController" class="style.member.user.controller.LoginController" p:loginService-ref="loginService"/>
-	<bean id="loginService" class="style.member.user.service.LoginServiceImpl" p:loginDao-ref="loginDao"/>
-	<bean id="loginDao" class="style.member.user.dao.LoginDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
+	<!-- 회원 VO -->
 	<bean id="memberVO" class="style.member.user.model.MemberVO"/>
+	
+	<!-- 로그인 관련 -->
+	<bean id="loginDao" class="style.member.user.dao.LoginDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
+	<bean id="loginService" class="style.member.user.service.LoginServiceImpl" p:loginDao-ref="loginDao"/>
+	<bean id="loginController" class="style.member.user.controller.LoginController" p:loginService-ref="loginService"/>
+	
 
+	<!-- 회원가입 관련 -->
+	<bean id="addDao" class="style.member.user.dao.AddDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
+	<bean id="addService" class="style.member.user.service.AddServiceImpl" p:addDao-ref="addDao"/>
+	<bean id="addController" class="style.member.user.controller.AddController" p:addService-ref="addService"/>
 </beans>

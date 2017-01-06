@@ -1,5 +1,8 @@
 package style.member.user.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -20,12 +23,12 @@ public class AddController {
 	}
 	
 	
-	@RequestMapping(value="register.do", method=RequestMethod.GET)
+	@RequestMapping(value="registerForm.do", method=RequestMethod.GET)
 	public String setView(){
 		return "registerForm";
 	}
 	
-	@RequestMapping(value="register.do", method=RequestMethod.POST)
+	@RequestMapping(value="registerForm.do", method=RequestMethod.POST)
 	public ModelAndView register(HttpServletRequest request, MemberVO memberVo)throws Exception{
 	
 		//JSP 스크립트로 검증된 데이터를 
@@ -37,7 +40,21 @@ public class AddController {
 		
 		int check = addService.addUserInfo(memberVo);
 		
-		return null;
+		//컨테이너 생성
+		ModelAndView modelAndView = new ModelAndView();
+		Map<String,Object> model = new HashMap<String,Object>();
+		
+		if(check==1){
+			model.put("registerCheck", true);
+			modelAndView.addAllObjects(model);
+			modelAndView.setViewName("loginForm");
+			return modelAndView;
+		}else{
+			model.put("registerCheck", false);
+			modelAndView.addAllObjects(model);
+			modelAndView.setViewName("registerForm");
+			return modelAndView;
+		}
 		
 	}
 		
