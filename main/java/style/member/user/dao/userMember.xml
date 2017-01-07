@@ -25,6 +25,7 @@
 	</select>
 	
 	
+	
 	<!--(등록) 회원등록 -->
 	<insert id="insertMemberInfo" parameterType="style.member.user.model.MemberVO">
 		<!-- null값이 들어갈 수 있는 데이터는 ', jdbcType='을 명시해주어야 한다. -->
@@ -37,4 +38,28 @@
 									#{point, jdbcType=INTEGER})
 	</insert>
 	
+	
+	
+	<!-- (수정) 회원정보수정 -->
+		<!-- 비밀번호 재확인 -->
+	<select id="checkMember" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT password FROM CUSTOMER WHERE id=#{id}
+	</select>
+		<!-- 회원정보 수정 -->
+	<update id="updateUserInfo" parameterType="style.member.user.model.MemberVO">
+		UPDATE CUSTOMER SET password=#{password}, pass_quest=#{pass_quest}, pass_answer=#{pass_answer},
+									zipcode=#{zipcode, jdbcType=VARCHAR},
+									address1=#{address1, jdbcType=VARCHAR},
+									address2=#{address2, jdbcType=VARCHAR},
+									body=#{body}, height=#{height}
+						WHERE id=#{id}
+	</update>
+	
+	
+	
+	
+	<!-- (조회) 아이디 중복확인 -->
+	<select id="idCheck" parameterType="java.lang.String" resultType="INTEGER">
+		SELECT COUNT(*) FROM CUSTOMER WHERE id=#{id}
+	</select>
 </mapper>

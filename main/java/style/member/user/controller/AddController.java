@@ -27,10 +27,10 @@ public class AddController {
 	
 	@RequestMapping(value="/registerForm.do", method=RequestMethod.GET)
 	public String setView(){
-		return "registerForm";
+		return "member/registerForm";
 	}
 	
-	@RequestMapping(value="/registerForm.do", method=RequestMethod.POST)
+	@RequestMapping(value="/register.do", method=RequestMethod.POST)
 	public ModelAndView register(HttpServletRequest request, MemberVO memberVo)throws Exception{
 		System.out.println("Controller 접");
 		
@@ -56,12 +56,12 @@ public class AddController {
 		if(check==1){//회원등록이 완료되었으면
 			model.put("registerCheck", true);
 			modelAndView.addAllObjects(model);
-			modelAndView.setViewName("loginForm");
+			modelAndView.setViewName("member/loginForm");
 			return modelAndView;
 		}else{//회원등록을 실패하였으면
 			model.put("registerCheck", false);
 			modelAndView.addAllObjects(model);
-			modelAndView.setViewName("registerForm");
+			modelAndView.setViewName("member/registerForm");
 			return modelAndView;
 		}
 		

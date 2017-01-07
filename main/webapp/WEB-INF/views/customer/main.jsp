@@ -5,13 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>메인 페이지</title>
 </head>
 <body>
 	<c:choose>
 		<c:when test="${loginCheck }">
 			<h3>로그인 성공 여기는 메인페이지 입니다.</h3>
 			<h3>받은파라미터 값(키값 : id 값 : ${id })</h3>
+			
+			<!-- 회원정보 수정 버튼 -->
+			<input type="button" value="회원정보수정" onclick="window.location='updateForm.do'"/>
+
 		</c:when>
 		<c:otherwise>
 			<h3>로그인 실패</h3>

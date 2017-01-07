@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +27,7 @@ public class LoginController {
 	//초기 프로젝트 주소를 치면
 	@RequestMapping("/loginForm.do")
 	public String loginForm(){
-		return "loginForm";
+		return "member/loginForm";
 	}
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
@@ -39,7 +38,7 @@ public class LoginController {
 		if (session == null)
 			System.out.println("인증되지 않은 유저 접근");
 
-		return new ModelAndView("loginForm");
+		return new ModelAndView("member/loginForm");
 	}
 
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
@@ -55,7 +54,7 @@ public class LoginController {
 		//인증되지 않은 요청일 경우 로그인화면으로 이동
 		if(session==null){
 			//정상적인 경로가아닌 직접적으로 요청했을때!
-			return new ModelAndView("loginForm");
+			return new ModelAndView("member/loginForm");
 		}
 		
 		System.out.println("Controller service 전");
@@ -83,7 +82,7 @@ public class LoginController {
 			//비밀번호 불일치
 			System.out.println("로그인 실패");
 			model.put("loginCheck", false);
-			modelAndView.setViewName("loginForm");
+			modelAndView.setViewName("member/loginForm");
 			return modelAndView;
 		}
 

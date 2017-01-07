@@ -18,4 +18,17 @@
 	<bean id="addDao" class="style.member.user.dao.AddDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
 	<bean id="addService" class="style.member.user.service.AddServiceImpl" p:addDao-ref="addDao"/>
 	<bean id="addController" class="style.member.user.controller.AddController" p:addService-ref="addService"/>
+	
+	
+	<!-- 회원정보 수정 관련 -->
+	<bean id="updateDao" class="style.member.user.dao.UpdateDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
+	<bean id="updateService" class="style.member.user.service.UpdateServiceImpl" p:updateDao-ref="updateDao"/>
+	<bean id="updateController" class="style.member.user.controller.UpdateController" p:updateService-ref="updateService"/>
+	
+	
+	<!-- 아이디중복체크/이메일인증 관련 -->
+	<bean id="checkDao" class="style.member.user.dao.CheckDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
+	<bean id="checkService" class="style.member.user.service.CheckServiceImpl" p:checkDao-ref="checkDao"/>
+	<bean id="checkController" class="style.member.user.controller.CheckController" p:checkService-ref="checkService"/>
+	
 </beans>
