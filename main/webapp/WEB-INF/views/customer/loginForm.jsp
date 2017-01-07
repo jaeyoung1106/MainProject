@@ -11,7 +11,7 @@
 	<form id="loginForm" action="login.do" method="post">	
 		아이디 : <input type="text" size="10" id="id" name="id"/>
 		<br/>
-		비밀번호 : <input type="password" size="10" id="pass" name="pass"/>
+		비밀번호 : <input type="password" size="10" id="pass" name="password"/>
 		<br/>
 		<input type="submit" value="로그인" id="login" />
 		<input type="button" value="회원가입" id="register" onclick="window.location='registerForm.do'"/>
@@ -19,9 +19,8 @@
 		<input type="button" value="아이디찾기" id="findID"/>
 		<input type="button" value="비밀번호찾기" id="findPASS"/>
 	</form>
+
 </div>
-
-
 
 </body>
 </html>

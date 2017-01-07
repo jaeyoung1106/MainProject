@@ -14,6 +14,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public MemberVO getUserInfo(String id) {
 		// TODO Auto-generated method stub
+		System.out.println("Service Á¢");
 		return loginDao.getUserInfo(id); 
 	}
 

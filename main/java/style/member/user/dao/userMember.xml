@@ -19,14 +19,22 @@
 		<result property="regdate" 		column="REGDATE" 		jdbcType="DATE"		/>
 	</resultMap>
 	
+	<!--(조회) 처음로그인할때 한명의 회원정보 조회 -->
 	<select id="getMemberInfo" parameterType="java.lang.String" resultType="style.member.user.model.MemberVO">
 		SELECT * FROM CUSTOMER WHERE id=#{id}
 	</select>
 	
+	
+	<!--(등록) 회원등록 -->
 	<insert id="insertMemberInfo" parameterType="style.member.user.model.MemberVO">
-		INSERT INTO CUSTOMER VALUES(#{memberVo.getId()},#{memberVo.getPassword()},#{memberVo.getPass_quest()},#{memberVo.getPass_answer()},
-									#{memberVo.getName()},#{memberVo.getZipcode()},#{memberVo.getAddress1()},#{memberVo.getAddress2()},#{memberVo.getEmail()},
-									#{new java.sql.Date(memberVo.getBirth().getTime())},#{memberVo.getBody()},#{memberVo.getHeight()},#{memberVo.getGender()},#{memberVo.getRegdate()},#{memberVo.getPoint()})
+		<!-- null값이 들어갈 수 있는 데이터는 ', jdbcType='을 명시해주어야 한다. -->
+		INSERT INTO CUSTOMER VALUES(#{id}, #{password}, #{pass_quest}, #{pass_answer},
+									#{name},	#{zipcode, jdbcType=VARCHAR},
+									#{address1, jdbcType=VARCHAR},
+									#{address2, jdbcType=VARCHAR},	#{email},	#{birth},
+									#{body},	#{height},	#{gender},
+									#{regdate, jdbcType=DATE},
+									#{point, jdbcType=INTEGER})
 	</insert>
 	
 </mapper>
