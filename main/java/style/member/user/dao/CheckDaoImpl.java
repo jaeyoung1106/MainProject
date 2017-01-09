@@ -21,6 +21,14 @@ public class CheckDaoImpl implements CheckDao {
 		return sqlSession.selectOne(namespace+"idCheck",id);
 	}
 
+	@Override
+	public int checkEmail(String to) {
+		// TODO Auto-generated method stub
+		System.out.println("Dao Á¢");
+		return sqlSession.selectOne(namespace+"mailCheck",to);
+	}
+
+
 
 	
 

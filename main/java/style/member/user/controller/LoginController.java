@@ -1,7 +1,5 @@
 package style.member.user.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,7 +36,7 @@ public class LoginController {
 		if (session == null)
 			System.out.println("인증되지 않은 유저 접근");
 
-		return new ModelAndView("member/loginForm");
+		return new ModelAndView("main");
 	}
 
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
@@ -64,34 +62,42 @@ public class LoginController {
 		String db_id = member.getId();
 		String db_pass = member.getPassword();
 
-		// 보낼 파라미터 >> 맵 형식
-		Map<String, Object> model = new HashMap<String, Object>();
-		// 응답할 모델앤 뷰 >> 파라미터 맵을 담아서 test페이지 문자열
-		ModelAndView modelAndView = new ModelAndView();
+		// 정보주머니와 페이지 이름을 담는 컨테이너 선언
+		ModelAndView modelAndView = new ModelAndView();;
 		
 		if (password.equals(db_pass)) {
 			// 서버에 저장할 섹션값 : 아이디문자와 회원 객체>>자바코드에서 계속유지시켜 사용할 것
 			System.out.println("로그인 성공");
 			session.setAttribute("loginID", member.getId());
 			session.setAttribute("member", member);
+			session.setAttribute("loginCheck", true);
 			
-			//페이지로 보낼 파라미터
-			model.put("id", member.getId());
-			model.put("loginCheck", true);
+			modelAndView.setViewName("main");
 		}else{
 			//비밀번호 불일치
 			System.out.println("로그인 실패");
-			model.put("loginCheck", false);
 			modelAndView.setViewName("member/loginForm");
 			return modelAndView;
 		}
 
-		
-
-		modelAndView.addAllObjects(model);
-		modelAndView.setViewName("main");
-
 		return modelAndView;
-
+	}
+	
+	
+	
+	@RequestMapping(value="/logout.do")
+	public String logOut(HttpServletRequest request){
+		//로그인중인 session 받기
+		HttpSession session = request.getSession(false);
+		
+		if(session.getAttribute("loginID")==null){
+			System.out.println("비정상적 요청(비로그인상태)");
+			return "nolog";
+		}else{
+			session.invalidate();
+			System.out.println("로그아웃 성공");
+		}
+		
+		return "member/loginForm";
 	}
 }

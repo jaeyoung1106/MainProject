@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,4 +57,43 @@ public class CheckController {
 		modelAndView.setViewName("member/idCheck");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="/emailCheck.do", method=RequestMethod.POST)
+	public ModelAndView sendEmail(HttpServletRequest request)throws Exception{
+		System.out.println("Controller 접");
+		
+		request.setCharacterEncoding("UTF-8");
+		String to = request.getParameter("email");
+		
+		System.out.println("Controller service 전");
+		int check = checkService.checkEmail(to);
+		System.out.println("Controller service 후 ");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		Map<String,Object> model = new HashMap<String,Object>();
+		
+		
+		if(check==1){//이미 등록된 회원인 경우
+			System.out.println("이미 등록된 이메일");
+			model.put("exist", true);
+		}else{//처음 등록하려는 회원인 경우
+			//받은 email로 이메일 보내기 (난수)
+			System.out.println("처음 등록하려는 이메일");
+			System.out.println("Controller service 전");
+			String code = checkService.sendEmail(to);
+			System.out.println("Controller service 후");
+			System.out.println("이메일전송");
+			HttpSession session=request.getSession(true);
+			session.setAttribute("emailCode",code);
+			session.setMaxInactiveInterval(2*60);//제한시간 2분
+			model.put("exist", false);
+		}
+		
+		modelAndView.addAllObjects(model);
+		modelAndView.setViewName("member/registerForm");
+		
+		return modelAndView;
+	}
+	
+	
 }

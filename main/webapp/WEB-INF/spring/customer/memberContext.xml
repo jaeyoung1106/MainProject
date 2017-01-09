@@ -30,5 +30,28 @@
 	<bean id="checkDao" class="style.member.user.dao.CheckDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
 	<bean id="checkService" class="style.member.user.service.CheckServiceImpl" p:checkDao-ref="checkDao"/>
 	<bean id="checkController" class="style.member.user.controller.CheckController" p:checkService-ref="checkService"/>
+	<!-- 이메일 보내기 --> 
+	<!-- 이메일 관련 -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="smtp.gmail.com" />
+	    <property name="port" value="587" />
+	    <property name="username" value="onedarkin@gmail.com" />
+	    <property name="password" value="asdf!@#asdf" />
+	    <property name="javaMailProperties">
+	        <props>
+	            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	        </props>
+	    </property>
+	</bean>
+
+
+
+	
+	<!-- 회원탈퇴 관련 -->
+	<bean id="deleteDao" class="style.member.user.dao.DeleteDaoImpl" p:sqlSession-ref="sqlSessionTemplate"/>
+	<bean id="deleteService" class="style.member.user.service.DeleteServiceImpl" p:deleteDao-ref="deleteDao"/>
+	<bean id="deleteController" class="style.member.user.controller.DeleteController" p:deleteService-ref="deleteService"/>
 	
 </beans>

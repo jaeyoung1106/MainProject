@@ -5,22 +5,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>메인 페이지</title>
+<title>메인페이지</title>
+
+<link rel="stylesheet" href="/style/resources/css/common.css">
+<link rel="stylesheet" href="/style/resources/css/layout.css">
+<link rel="stylesheet" href="/style/resources/css/style.css">
 </head>
 <body>
-	<c:choose>
-		<c:when test="${loginCheck }">
-			<h3>로그인 성공 여기는 메인페이지 입니다.</h3>
-			<h3>받은파라미터 값(키값 : id 값 : ${id })</h3>
-			
-			<!-- 회원정보 수정 버튼 -->
-			<input type="button" value="회원정보수정" onclick="window.location='updateForm.do'"/>
+	<div id="wrap" class="cf">
 
-		</c:when>
-		<c:otherwise>
-			<h3>로그인 실패</h3>
-			<h3>다시 로그인페이지로 이동합니다.</h3>
-		</c:otherwise>
-	</c:choose>
+		<%--HEADER --%>
+		<%@include file="/WEB-INF/views/pagePiece/header.jspf" %>
+
+		<%--SECTION --%>
+		<div id="section" class="cf">
+			<div class="main_visual"></div>
+			<div class="article cf">
+				<div class="text_box">
+					<p class="p01">FREE SHIPPING WORLWIDE</p>
+					<h2>YEAR ROUND</h2>
+					<div class="br"></div>
+					<p class="p02">FREE SHIPPING WORLWIDE</p>
+				</div>
+				<div class="cont_area cf">
+					<div class="cont_sub cont01"></div>
+					<div class="cont_sub cont02"></div>
+					<div class="cont_sub cont03"></div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<%--FOOTER --%>
+		<div id="footer"></div>
+	</div>
 </body>
 </html>

@@ -7,6 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 비밀번호 재확인</title>
+<script>
+	function deleteMember(){
+		if(document.getElementById("password").value==""){
+			alert("비밀번호를 입력하세요");
+			return false;
+		}
+		
+		window.location="/style/deleteMember.do";
+	}
+</script>
 </head>
 <body>
 	<div id="article">
@@ -23,7 +33,7 @@
 								type="button" value="아이디중복확인" onclick="" />
 						<tr>
 							<td>비밀번호
-							<td><input type="password" size="10" name="password" required/>
+							<td><input type="password" id="password" size="10" name="password" required/>
 						<tr>
 							<td>비밀번호질문
 							<td><select name="pass_quest">
@@ -80,6 +90,8 @@
 							<td><input type="submit" value="정보수정" />
 							<td><input type="button" value="취소"
 								onclick="window.history.go(-1)" />
+						<tr>
+						<td colspan="2"><input type="button" value="회원탈퇴" onclick="deleteMember()"/> 
 					</table>
 				</form>
 			</c:when>

@@ -62,4 +62,19 @@
 	<select id="idCheck" parameterType="java.lang.String" resultType="INTEGER">
 		SELECT COUNT(*) FROM CUSTOMER WHERE id=#{id}
 	</select>
+	
+	
+	
+	<!-- (조회) 이메일 중복확인 -->
+	<select id="mailCheck" parameterType="java.lang.String" resultType="INTEGER">
+		SELECT COUNT(*) FROM CUSTOMER WHERE email=#{email}
+	</select>
+	
+	
+	
+	<!-- (삭제) 회원탈퇴 -->
+	<delete id="deleteUserInfo" parameterType="java.lang.String">
+		DELETE FROM CUSTOMER WHERE id=#{id}
+	</delete>
+
 </mapper>
